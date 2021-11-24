@@ -1,3 +1,4 @@
+import asyncio
 import logging
 
 import pytest
@@ -19,6 +20,7 @@ class PytestHooks:
         self.session_manager = SeleniumSession(self.service)
         self.is_worker = True
         self.is_controller = False
+        self.event_loop = asyncio.get_event_loop()
 
     @pytest.hookimpl
     def pytest_sessionstart(self, session: Session) -> None:

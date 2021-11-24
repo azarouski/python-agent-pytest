@@ -10,7 +10,7 @@ from pydantic import BaseModel
 from pydantic.utils import deep_update
 
 PREFIX = "reporting"
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 
 class TestRunSettings(BaseModel):
@@ -74,9 +74,17 @@ class Settings(BaseModel):
     A class that inherit from BaseModel and represents some settings.
     """
 
+    @property
+    def log_level_name(self) -> int:
+        if self.log_level and isinstance(logging.getLevelName(self.log_level), int):
+            return logging.getLevelName(self.log_level)
+        else:
+            return logging.WARN
+
     enabled: bool = True
     project_key: str = "DEF"
     send_logs: bool = True
+    log_level: Optional[str]
     server: ServerSettings
     run: TestRunSettings = TestRunSettings()
     notifications: Optional[NotificationsSettings] = None
