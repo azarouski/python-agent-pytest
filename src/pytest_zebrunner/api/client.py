@@ -26,11 +26,6 @@ class ZebrunnerAPI:
     authenticated = False
 
     def __init__(self, service_url: str = None, access_token: str = None):
-        """
-        Args:
-            service_url (str): Url to access Zebrunner API. None by default.
-            access_token (str): Access token to access Zebrunner API. None by default.
-        """
         self.logger = logging.getLogger("zebrunner_client")
         self.logger.addHandler(logging.StreamHandler())
         self.logger.setLevel(zebrunner_context.settings.log_level_name)

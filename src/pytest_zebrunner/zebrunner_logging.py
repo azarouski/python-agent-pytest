@@ -1,10 +1,7 @@
-import logging
 import time
 from datetime import datetime, timedelta
 from logging import LogRecord, StreamHandler
 from typing import List
-
-import httpx
 
 from pytest_zebrunner.api.client import ZebrunnerAPI
 from pytest_zebrunner.api.models import LogRecordModel
@@ -51,15 +48,12 @@ class ZebrunnerHandler(StreamHandler):
 
     def push_logs(self) -> None:
         """
-        Updates last_push datetime, resets logs list and send the to Zebrunner API
-        for reporting if test_run_id is active.
+        Send all collected to zebrunner and clear list of logs.
 
         """
         try:
             if zebrunner_context.test_run_id and zebrunner_context.settings.send_logs:
                 self.api.send_logs(zebrunner_context.test_run_id, self.logs)
-        except httpx.HTTPError as e:
-            logging.error("Failed to send logs to zebrunner", exc_info=e)
         finally:
             self.logs = []
             self.last_push = datetime.utcnow()
