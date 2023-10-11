@@ -8,16 +8,16 @@ logger = logging.getLogger(__name__) # It might any logger that you created earl
 logger.addHandler(ZebrunnerHandler())
 
 
-def test_generator() -> None:
-    with open("test_stress.py", "a+") as file:
-        for i in range(1000):
-            file.writelines(
-                f"\n\ndef test_success{i}() -> None:"
-                f"\n    logger.info('test №{i} was started')"
-                "\n    wait_time = random.random() * 2"
-                "\n    time.sleep(wait_time)"
-                "\n    logger.info(f'waiting time was: {wait_time}')"
-                f"\n    assert random.randint(0, 1) == 1\n")
+# def test_generator() -> None:
+#     with open("test_stress.py", "a+") as file:
+#         for i in range(1000):
+#             file.writelines(
+#                 f"\n\ndef test_success{i}() -> None:"
+#                 f"\n    logger.info('test №{i} was started')"
+#                 "\n    wait_time = random.random() * 2"
+#                 "\n    time.sleep(wait_time)"
+#                 "\n    logger.info(f'waiting time was: {wait_time}')"
+#                 f"\n    assert random.randint(0, 1) == 1\n")
 
 
 def test_success0() -> None:
