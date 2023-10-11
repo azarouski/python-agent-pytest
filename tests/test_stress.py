@@ -4,8 +4,9 @@ import logging
 
 from pytest_zebrunner.zebrunner_logging import ZebrunnerHandler
 
-logger = logging.getLogger(__name__) # It might any logger that you created earlier
+logger = logging.getLogger(__name__)  # It might any logger that you created earlier
 logger.addHandler(ZebrunnerHandler())
+logger.setLevel(logging.DEBUG)
 
 
 # def test_generator() -> None:
